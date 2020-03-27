@@ -1,12 +1,10 @@
 package com.shyam.app.order.bo.test;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMostOnce;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.any;
 
 import java.sql.SQLException;
 
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.shyam.app.model.order.Order;
@@ -25,7 +22,7 @@ import com.shyam.app.order.dao.OrderDAO;
 class OrderBOImplTest {
 
 	@Mock
-	OrderDAO dao;
+	private OrderDAO dao;
 
 	private OrderBOImpl bo;
 
@@ -40,7 +37,7 @@ class OrderBOImplTest {
 	public void placeOrder_Should_Create_Order() throws SQLException, BOException {
 
 		Order order = new Order();
-		when(dao.create(org.mockito.ArgumentMatchers.any(Order.class))).thenReturn(new Order(1));
+		when(dao.create(any(Order.class))).thenReturn(new Order(1));
 
 		boolean result = bo.placeOrder(order);
 		Assertions.assertTrue(result);
